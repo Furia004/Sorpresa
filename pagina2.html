@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Elige tu día mágico</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Caudex&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Caudex', serif;
+      background: url('fondo.jpg') no-repeat center center fixed;
+      background-size: contain;
+      background-color: black;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      color: white;
+      overflow: hidden;
+    }
+
+    .decoracion-izq, .decoracion-der {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 340px;
+      height: auto;
+      opacity: 0.7;
+      z-index: 1;
+    }
+
+    .decoracion-izq {
+      left: 10px;
+    }
+
+    .decoracion-der {
+      right: 10px;
+    }
+
+    .contenedor {
+      background: rgba(0, 0, 0, 0.65);
+      border-radius: 15px;
+      padding: 40px;
+      text-align: center;
+      max-width: 650px;
+      margin: 30px;
+      z-index: 2;
+      box-shadow: 0 0 20px #000;
+      animation: aparecer 1s ease-in-out;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #00e676;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+
+    .dias {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .dias button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #4caf50;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      font-family: 'Caudex', serif;
+      transition: all 0.3s ease;
+    }
+
+    .dias button:hover {
+      background-color: #45a049;
+    }
+
+    .respuesta {
+      margin-top: 20px;
+      font-size: 1.1em;
+      color: #ffd700;
+    }
+
+    .firma {
+      margin-top: 30px;
+      font-style: italic;
+      color: #ccc;
+      font-size: 0.95em;
+    }
+
+    /* ❄️ Nieve */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 20px;
+      z-index: 10;
+      pointer-events: none;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Decoraciones laterales -->
+  <img src="decoracion2.PNG" class="decoracion-izq">
+  <img src="decoracion3.png" class="decoracion-der">
+
+  <!-- Contenido principal -->
+  <div class="contenedor">
+    <h1>¡Elige tu día favorito! 🐉</h1>
+    <p>Dime qué día te apetece más para vivir nuestra pequeña aventura de dragones:</p>
+
+    <div class="dias">
+      <button onclick="mostrarRespuesta('lunes')">Lunes</button>
+      <button onclick="mostrarRespuesta('martes')">Martes</button>
+      <button onclick="mostrarRespuesta('miércoles')">Miércoles</button>
+      <button onclick="mostrarRespuesta('jueves')">Jueves</button>
+      <button onclick="mostrarRespuesta('viernes')">Viernes</button>
+      <button onclick="mostrarRespuesta('sábado')">Sábado</button>
+      <button onclick="mostrarRespuesta('domingo')">Domingo</button>
+    </div>
+
+    <div class="respuesta" id="respuesta"></div>
+
+    <div class="firma">✨ Sea el día que sea, me encantará compartirlo contigo ✨</div>
+  </div>
+
+  <script>
+    function mostrarRespuesta(dia) {
+      document.getElementById('respuesta').textContent =
+        `¡Perfecto! Entonces reservamos el ${dia} para verla. ❄️🐲`;
+
+      iniciarNieve();
+    }
+
+    function iniciarNieve() {
+      for (let i = 0; i < 50; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.textContent = '❄️';
+        snowflake.style.left = Math.random() * 100 + 'vw';
+        snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        snowflake.style.fontSize = (Math.random() * 12 + 12) + 'px';
+        document.body.appendChild(snowflake);
+
+        
+
+        setTimeout(() => {
+          snowflake.remove();
+        }, 50000);
+      }
+    }
+  </script>
+
+</body>
+</html>
